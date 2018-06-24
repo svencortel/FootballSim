@@ -27,7 +27,7 @@ public:
   void transferMoneyTo(FootballClub* fc, uint32_t value);
   // TODO: this could go with a "player value" mechanism
   //void transferMoneyTo(Player* p, uint32_t value);
-}
+};
 
 #define FOOTBALLCLUB_H
 #endif
