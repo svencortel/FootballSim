@@ -25,6 +25,9 @@ public:
   void extractFromBudget(uint32_t value);
 
   void transferMoneyTo(FootballClub* fc, uint32_t value);
+
+  string getPresentClubString() const;
+
   // TODO: this could go with a "player value" mechanism
   //void transferMoneyTo(Player* p, uint32_t value);
 };

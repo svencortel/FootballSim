@@ -2,16 +2,19 @@
 
 #include <string>
 
+#include "FootballClub.h"
+
 using std::string;
 
 class Player
 {
 private:
-  string first_name;
-  string last_name;
+  const string first_name;
+  const string last_name;
   uint8_t atk_score;
   uint8_t mid_score;
   uint8_t def_score;
+  FootballClub* current_club;
 
 public:
   Player(string fname, string lname="");
@@ -22,7 +25,8 @@ public:
          uint8_t mid,
          uint8_t def);
 
-  void setName(string fname, string lname="");
+  // No need for this because players do not change names?
+  //void setName(string fname, string lname="");
   string getFullName() const;
   string getPartialName() const;
   string getFirstName() const;
@@ -38,6 +42,9 @@ public:
   uint8_t getDef() const;
 
   string getSkillString() const;
+
+  FootballClub* getCurrentClub() const;
+  void setCurrentClub(FootballClub* newClub);
 };
 
 #define PLAYER_H

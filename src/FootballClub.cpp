@@ -2,6 +2,8 @@
 
 #include "FootballClub.h"
 
+using std::to_string;
+
 FootballClub::FootballClub(string full_name_,
 		           string partial_name_,
 			   string jargon_name_,
@@ -47,3 +49,12 @@ void FootballClub::transferMoneyTo(FootballClub* fc, uint32_t value)
   fc->addToBudget(value);
   extractFromBudget(value);
 }
+
+string FootballClub::getPresentClubString() const
+{
+  return full_name+", also known as "+partial_name+
+	 " or "+jargon_name+".\n"+
+	 "They currently hold a budget of "+
+	 to_string(budget)+" euros.";
+}
+

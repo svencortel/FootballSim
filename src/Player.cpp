@@ -22,13 +22,6 @@ Player::Player(string fname_, string lname_,
 	, def_score(def)
 {}
 
-void Player::setName(string fname_,
-		     string lname_)
-{
-  first_name = fname_;
-  last_name  = lname_;
-}
-
 string Player::getFullName() const
 {
   if(last_name.compare("") == 0)
@@ -107,3 +100,12 @@ string Player::getSkillString() const
 	 "Def:\t" + to_string(def_score);
 }
 
+FootballClub* Player::getCurrentClub() const
+{
+  return current_club;
+}
+
+void Player::setCurrentClub(FootballClub* newClub)
+{
+  current_club = newClub;
+}
