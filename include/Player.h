@@ -22,9 +22,9 @@ public:
   Player(string fname,
          string lname,
          string alias="",
-         uint8_t atk=(uint8_t)50,
-         uint8_t mid=(uint8_t)50,
-         uint8_t def=(uint8_t)50);
+         uint8_t atk=50,
+         uint8_t mid=50,
+         uint8_t def=50);
 
   // No need for this because players do not change names?
   //void setName(string fname, string lname="");
