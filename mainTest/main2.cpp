@@ -1,5 +1,3 @@
-#include<string>
-
 #include "FootballClub.h"
 
 void do_test(string fname, string pname, string jname,

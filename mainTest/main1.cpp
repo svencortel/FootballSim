@@ -1,5 +1,3 @@
-#include <string>
-
 #include "Player.h"
 
 using std::string;
