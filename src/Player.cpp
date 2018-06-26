@@ -6,18 +6,11 @@
 using std::string;
 using std::to_string;
 
-Player::Player(string fname_, string lname_)
+Player::Player(string fname_, string lname_, string alias_,
+	             uint8_t atk, uint8_t mid, uint8_t def)
 	: first_name(fname_)
 	, last_name(lname_)
-	, atk_score(50)
-	, mid_score(50)
-	, def_score(50)
-{}
-
-Player::Player(string fname_, string lname_,
-	       uint8_t atk, uint8_t mid, uint8_t def)
-	: first_name(fname_)
-	, last_name(lname_)
+  , alias(alias_)
 	, atk_score(atk)
 	, mid_score(mid)
 	, def_score(def)
@@ -49,6 +42,11 @@ string Player::getFirstName() const
 string Player::getLastName() const
 {
   return last_name;
+}
+
+string Player::getAlias() const
+{
+  return alias.compare("") == 0 ? last_name : alias;
 }
 
 void Player::increaseAtk(uint8_t value)

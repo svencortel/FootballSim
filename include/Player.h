@@ -12,19 +12,19 @@ class Player
 private:
   const string first_name;
   const string last_name;
+  const string alias;
   uint8_t atk_score;
   uint8_t mid_score;
   uint8_t def_score;
   FootballClub* current_club;
 
 public:
-  Player(string fname, string lname="");
-
   Player(string fname,
          string lname,
-         uint8_t atk,
-         uint8_t mid,
-         uint8_t def);
+         string alias="",
+         uint8_t atk=(uint8_t)50,
+         uint8_t mid=(uint8_t)50,
+         uint8_t def=(uint8_t)50);
 
   // No need for this because players do not change names?
   //void setName(string fname, string lname="");
@@ -32,6 +32,7 @@ public:
   string getPartialName() const;
   string getFirstName() const;
   string getLastName() const;
+  string getAlias() const;
 
   void increaseAtk(uint8_t value);
   uint8_t getAtk() const;
