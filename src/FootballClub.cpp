@@ -6,9 +6,9 @@
 using std::to_string;
 
 FootballClub::FootballClub(string full_name_,
-		           string partial_name_,
-			   string jargon_name_,
-			   int64_t budget_)
+                           string partial_name_,
+                           string jargon_name_,
+                           int64_t budget_)
 	: full_name(full_name_)
 	, partial_name(partial_name_)
 	, jargon_name(jargon_name_)
