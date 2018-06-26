@@ -1,6 +1,7 @@
 #include <string>
 
 #include "Player.h"
+#include "FootballClub.h"
 
 using std::string;
 using std::to_string;

@@ -1,6 +1,7 @@
 #include <string>
 
 #include "Player.h"
+#include "FootballClub.h"
 
 void do_test(Player* p,
 	     FootballClub* new_fc,

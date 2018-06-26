@@ -1,6 +1,7 @@
 #include <string>
 
 #include "FootballClub.h"
+#include "Player.h"
 
 using std::to_string;
 
@@ -50,11 +51,29 @@ void FootballClub::transferMoneyTo(FootballClub* fc, uint32_t value)
   extractFromBudget(value);
 }
 
+bool FootballClub::addPlayer(Player* new_player)
+{
+  return players.insert({new_player->getFullName(), new_player}).second;
+}
+
 string FootballClub::getPresentClubString() const
 {
   return full_name+", also known as "+partial_name+
 	 " or "+jargon_name+".\n"+
 	 "They currently hold a budget of "+
 	 to_string(budget)+" euros.";
+}
+
+string FootballClub::getAllPlayersString() const
+{
+  string out="";
+  uint8_t player_nr=0;
+  for(const auto &p : players)
+  {
+    player_nr++;
+    out+= to_string(player_nr) + ". " + p.second->getFullName();
+  }
+
+  return out;
 }
 

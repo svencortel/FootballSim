@@ -1,10 +1,11 @@
 #ifndef PLAYER_H
+#define PLAYER_H
 
 #include <string>
 
-#include "FootballClub.h"
-
 using std::string;
+
+class FootballClub;
 
 class Player
 {
@@ -47,5 +48,4 @@ public:
   void setCurrentClub(FootballClub* newClub);
 };
 
-#define PLAYER_H
 #endif
