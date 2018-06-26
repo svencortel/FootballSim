@@ -34,11 +34,11 @@ public:
   void transferMoneyTo(FootballClub* fc, uint32_t value);
 
   bool addPlayer(Player* new_player);
-  bool removePlayer(Player* removed_player);
+  bool removePlayer(string fullname);
+  Player* getPlayer(string name) const;
 
   string getPresentClubString() const;
   string getAllPlayersString() const;
-  Player* getPlayer(string name) const;
 
   // TODO: this could go with a "player value" mechanism
   //void transferMoneyTo(Player* p, uint32_t value);

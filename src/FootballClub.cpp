@@ -56,6 +56,11 @@ bool FootballClub::addPlayer(Player* new_player)
   return players.insert({new_player->getFullName(), new_player}).second;
 }
 
+bool FootballClub::removePlayer(string name)
+{
+  return players.erase(name) > 0;
+}
+
 string FootballClub::getPresentClubString() const
 {
   return full_name+", also known as "+partial_name+
