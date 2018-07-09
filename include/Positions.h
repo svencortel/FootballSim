@@ -1,8 +1,13 @@
+#ifndef POSITIONS_H
+#define POSITIONS_H
 
+#include <string>
+
+using std::string;
 
 enum PositionEnum
 {
-  STR,
+  ST,
   LW,
   RW,
   CF,
@@ -14,10 +19,9 @@ enum PositionEnum
   LB,
   RB,
   CB,
-  GK
-}
+  GK,
+  SUB,
+  RES
+};
 
-struct Position
-{
-  
-}
+#endif
