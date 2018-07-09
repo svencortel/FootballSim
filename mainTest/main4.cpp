@@ -10,14 +10,6 @@ using std::unordered_map;
 typedef unordered_map<string, Player*> player_map;
 typedef pair<string, Player*> player_map_pair;
 
-void do_test(FootballClub* fc,
-             player_map players)
-{
-  printf("\n----**TEST**----\n");
-
-
-}
-
 player_map_pair ppair(string fname, string lname, string alias,
                      uint8_t atk, uint8_t mid, uint8_t def)
 {
