@@ -2,12 +2,12 @@
 #include "FootballClub.h"
 
 #include <utility>
-#include <unordered_map>
+#include <map>
 
 using std::pair;
-using std::unordered_map;
+using std::map;
 
-typedef unordered_map<string, Player*> player_map;
+typedef map<string, Player*> player_map;
 typedef pair<string, Player*> player_map_pair;
 
 player_map_pair ppair(string fname, string lname, string alias,

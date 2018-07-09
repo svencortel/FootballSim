@@ -64,7 +64,7 @@ void FootballClub::addPlayers(vector<Player*> new_players)
   }
 }
 
-void FootballClub::addPlayers(unordered_map<string, Player*> new_players)
+void FootballClub::addPlayers(map<string, Player*> new_players)
 {
   players.insert(new_players.begin(), new_players.end());
 }

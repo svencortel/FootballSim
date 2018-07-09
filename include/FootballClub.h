@@ -2,11 +2,11 @@
 #define FOOTBALLCLUB_H
 
 #include <string>
-#include <unordered_map>
+#include <map>
 #include <vector>
 
 using std::string;
-using std::unordered_map;
+using std::map;
 using std::vector;
 
 class Player;
@@ -18,7 +18,7 @@ private:
   // make budget signed to allow negative values?
   int64_t budget;
   // a map of players with their full names as keys
-  unordered_map<string, Player*> players;
+  map<string, Player*> players;
 public:
   FootballClub(string full_name_,
 	       string partial_name_,
@@ -37,7 +37,7 @@ public:
 
   bool addPlayer(Player* new_player);
   void addPlayers(vector<Player*> new_players);
-  void addPlayers(unordered_map<string, Player*> new_players);
+  void addPlayers(map<string, Player*> new_players);
   bool removePlayer(string fullname);
   Player* getPlayer(string name) const;
 
