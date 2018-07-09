@@ -13,6 +13,8 @@ FootballClub::FootballClub(string full_name_,
 	, partial_name(partial_name_)
 	, jargon_name(jargon_name_)
 	, budget(budget_)
+  , number_of_first_team_deployed(0)
+  , number_of_subs_deployed(0)
 {}
 
 string FootballClub::getFullName() const
@@ -53,7 +55,7 @@ void FootballClub::transferMoneyTo(FootballClub* fc, uint32_t value)
 
 bool FootballClub::addPlayer(Player* new_player)
 {
-  return players.insert({new_player->getFullName(), new_player}).second;
+  return players.insert({new_player->getFullName(), {RES, new_player}}).second;
 }
 
 void FootballClub::addPlayers(vector<Player*> new_players)
@@ -62,11 +64,6 @@ void FootballClub::addPlayers(vector<Player*> new_players)
   {
     addPlayer(*it);
   }
-}
-
-void FootballClub::addPlayers(map<string, Player*> new_players)
-{
-  players.insert(new_players.begin(), new_players.end());
 }
 
 bool FootballClub::removePlayer(string name)
@@ -82,6 +79,30 @@ string FootballClub::getPresentClubString() const
 	 to_string(budget)+" euros.";
 }
 
+static string getPositionString(PositionEnum pos)
+{
+#define CASE(position) case(position): return #position; break;
+  switch(pos)
+  {
+    CASE(ST)
+    CASE(LW)
+    CASE(RW)
+    CASE(CF)
+    CASE(CAM)
+    CASE(LM)
+    CASE(RM)
+    CASE(CM)
+    CASE(CDM)
+    CASE(LB)
+    CASE(RB)
+    CASE(CB)
+    CASE(GK)
+    CASE(SUB)
+    CASE(RES)
+  }
+#undef CASE
+}
+
 string FootballClub::getAllPlayersString() const
 {
   string out="";
@@ -89,9 +110,11 @@ string FootballClub::getAllPlayersString() const
   for(const auto &p : players)
   {
     player_nr++;
-    out+= to_string(player_nr) + ". " + p.second->getFullName() + " (" + p.second->getAlias() + ")\n";
+    out+= to_string(player_nr) + ". " +
+    p.second.second->getFullName() + " (" +
+    p.second.second->getAlias() + ")\t" +
+    getPositionString(p.second.first) + "\n";
   }
 
   return out;
 }
-

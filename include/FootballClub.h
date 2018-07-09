@@ -4,10 +4,14 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <utility>
+
+#include "Positions.h"
 
 using std::string;
 using std::map;
 using std::vector;
+using std::pair;
 
 class Player;
 
@@ -18,7 +22,13 @@ private:
   // make budget signed to allow negative values?
   int64_t budget;
   // a map of players with their full names as keys
-  map<string, Player*> players;
+  // also stores information about players' position in the
+  // team
+  map<string, pair<PositionEnum, Player*>> players;
+  // counter to use to limit the number of first team and sub players
+  uint8_t number_of_first_team_deployed;
+  uint8_t number_of_subs_deployed;
+
 public:
   FootballClub(string full_name_,
 	       string partial_name_,
@@ -37,12 +47,14 @@ public:
 
   bool addPlayer(Player* new_player);
   void addPlayers(vector<Player*> new_players);
-  void addPlayers(map<string, Player*> new_players);
   bool removePlayer(string fullname);
   Player* getPlayer(string name) const;
 
   string getPresentClubString() const;
   string getAllPlayersString() const;
+
+  void chooseFirstTeam();
+  vector<pair<PositionEnum, Player*>> getMatchTeam() const;
 
   // TODO: this could go with a "player value" mechanism
   //void transferMoneyTo(Player* p, uint32_t value);
