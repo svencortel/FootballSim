@@ -52,4 +52,6 @@ int main()
 				                               250000000);
 
   do_test(p1, fc2, fc1, 185000000);
+
+  return 0;
 }
