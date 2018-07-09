@@ -56,6 +56,19 @@ bool FootballClub::addPlayer(Player* new_player)
   return players.insert({new_player->getFullName(), new_player}).second;
 }
 
+void FootballClub::addPlayers(vector<Player*> new_players)
+{
+  for(std::vector<Player*>::iterator it = new_players.begin(); it != new_players.end(); ++it)
+  {
+    addPlayer(*it);
+  }
+}
+
+void FootballClub::addPlayers(unordered_map<string, Player*> new_players)
+{
+  players.insert(new_players.begin(), new_players.end());
+}
+
 bool FootballClub::removePlayer(string name)
 {
   return players.erase(name) > 0;
@@ -76,7 +89,7 @@ string FootballClub::getAllPlayersString() const
   for(const auto &p : players)
   {
     player_nr++;
-    out+= to_string(player_nr) + ". " + p.second->getFullName();
+    out+= to_string(player_nr) + ". " + p.second->getFullName() + " (" + p.second->getAlias() + ")\n";
   }
 
   return out;

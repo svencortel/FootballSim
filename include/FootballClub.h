@@ -3,9 +3,11 @@
 
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 using std::string;
 using std::unordered_map;
+using std::vector;
 
 class Player;
 
@@ -34,6 +36,8 @@ public:
   void transferMoneyTo(FootballClub* fc, uint32_t value);
 
   bool addPlayer(Player* new_player);
+  void addPlayers(vector<Player*> new_players);
+  void addPlayers(unordered_map<string, Player*> new_players);
   bool removePlayer(string fullname);
   Player* getPlayer(string name) const;
 
