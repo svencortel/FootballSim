@@ -182,6 +182,10 @@ void FootballClub::chooseFirstTeam()
       {
         it->second.first = SUB;
       }
+      else
+      {
+        number_of_first_team_deployed ++;
+      }
     }
 
     // if we have too many subs then res them
