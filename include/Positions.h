@@ -7,7 +7,7 @@ using std::string;
 
 enum PositionEnum
 {
-  ST,
+  ST = 0,
   LW,
   RW,
   CF,
@@ -19,8 +19,8 @@ enum PositionEnum
   LB,
   RB,
   CB,
-  GK,
-  SUB,
+  GK,  // = 12
+  SUB, // = 13
   RES
 };
 
