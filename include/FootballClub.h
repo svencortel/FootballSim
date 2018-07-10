@@ -28,6 +28,7 @@ private:
   // counter to use to limit the number of first team and sub players
   uint8_t number_of_first_team_deployed;
   uint8_t number_of_subs_deployed;
+  bool goalkeeper_deployed;
 
 public:
   FootballClub(string full_name_,

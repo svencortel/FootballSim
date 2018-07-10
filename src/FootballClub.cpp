@@ -15,6 +15,7 @@ FootballClub::FootballClub(string full_name_,
 	, budget(budget_)
   , number_of_first_team_deployed(0)
   , number_of_subs_deployed(0)
+  , goalkeeper_deployed(false)
 {}
 
 string FootballClub::getFullName() const
@@ -103,6 +104,28 @@ static string getPositionString(PositionEnum pos)
 #undef CASE
 }
 
+enum PadEnum {
+  FRONT = 0,
+  BACK
+};
+
+// TODO: maybe modify this function to pad with a chosen character
+// TODO(2): move this method from here to a "Utils.h" file
+static string getPaddedString(uint16_t pad, string input_string, PadEnum padenum)
+{
+  size_t string_length = input_string.length();
+
+  // just pad with a blank space if pad is shorter than the string to pad
+  if (pad <= string_length)
+  {
+    return padenum == FRONT ? " " + input_string : input_string + " ";
+  }
+
+  string pad_string (pad-string_length, ' ');
+
+  return padenum == FRONT ? pad_string + input_string : input_string + pad_string;
+}
+
 string FootballClub::getAllPlayersString() const
 {
   string out="";
@@ -110,11 +133,79 @@ string FootballClub::getAllPlayersString() const
   for(const auto &p : players)
   {
     player_nr++;
-    out+= to_string(player_nr) + ". " +
-    p.second.second->getFullName() + " (" +
-    p.second.second->getAlias() + ")\t" +
+    out+= getPaddedString(35, to_string(player_nr) +
+    ". " + p.second.second->getFullName() + " (" +
+    p.second.second->getAlias() + ")", BACK) +
     getPositionString(p.second.first) + "\n";
   }
 
   return out;
+}
+
+#include <stdlib.h>
+#include <time.h>
+
+static PositionEnum getRandomPosEnum(bool include_subres=true)
+{
+  int limit = 15;
+  if(!include_subres)
+  {
+    limit = 13;
+  }
+
+  int rnumber = rand() % limit;
+
+  return static_cast<PositionEnum>(rnumber);
+}
+
+void FootballClub::chooseFirstTeam()
+{
+  if(players.empty())
+  {
+    return;
+  }
+
+  map<string, pair<PositionEnum, Player*>>::iterator it = players.begin();
+
+  srand(time(NULL));
+
+  for(; it != players.end(); ++it)
+  {
+    // very random for now
+    it->second.first = getRandomPosEnum();
+
+    if(it->second.first != SUB &&
+       it->second.first != RES)
+    {
+      // if we have one too many first 11 players then sub them
+      number_of_first_team_deployed ++;
+      if(number_of_first_team_deployed == 12)
+      {
+        number_of_first_team_deployed --;
+        it->second.first = SUB;
+      }
+    }
+
+    // if we have too many subs then res them
+    if (it->second.first == SUB)
+    {
+      if(number_of_subs_deployed == 8)
+      {
+        // try to put them in first 11 if there is no place on bench
+        if(number_of_first_team_deployed < 11)
+        {
+          it->second.first = getRandomPosEnum(false);
+          number_of_first_team_deployed ++;
+        }
+        else
+        {
+          it->second.first = RES;
+        }
+      }
+      else
+      {
+        number_of_subs_deployed ++;
+      }
+    }
+  }
 }

@@ -10,13 +10,6 @@ using std::map;
 typedef map<string, Player*> player_map;
 typedef pair<string, Player*> player_map_pair;
 
-player_map_pair ppair(string fname, string lname, string alias,
-                     uint8_t atk, uint8_t mid, uint8_t def)
-{
-  Player *p = new Player(fname, lname, alias, atk, mid, def);
-  return {p->getFullName(), p};
-}
-
 int main()
 {
   printf("\n ---- TEST 1 ----\n");
@@ -30,7 +23,7 @@ int main()
 
   printf("\n ---- TEST 2 ----\n");
 
-  vector<Player*> more_players = { new Player("Keylor", "Navas", "", 31, 24, 44),
+  vector<Player*> some_players = { new Player("Keylor", "Navas", "", 31, 24, 44),
                                    new Player("Alvaro", "Odriozola", "", 31, 24, 44),
                                    new Player("Toni", "Kroos", "", 31, 24, 44),
                                    new Player("Dani", "Carvajal", "", 31, 24, 44),
@@ -47,7 +40,7 @@ int main()
                                    new Player("Marco", "Asensio", "", 92, 83, 45),
                                  };
 
-  real->addPlayers(more_players);
+  real->addPlayers(some_players);
 
   printf("%s\n", real->getAllPlayersString().c_str());
 
@@ -56,6 +49,23 @@ int main()
   real->addPlayer(new Player("Dani", "Ceballos", "", 80, 80, 64));
 
   printf("%s\n", real->getAllPlayersString().c_str());
+
+  printf("\n ---- TEST 4 ----\n");
+
+  vector<Player*> more_players = { new Player("Carlos", "Casimiro", "Casemiro", 31, 24, 44),
+                                   new Player("Achraf", "Hakimi", "", 31, 24, 44),
+                                   new Player("Lucas", "Vazquez", "", 31, 24, 44),
+                                   new Player("Jesus", "Vallejo", "", 31, 24, 44),
+                                   new Player("Theo", "Hernandez", "", 31, 24, 44),
+                                   new Player("Martin", "Odegaard", "", 31, 24, 44),
+                                 };
+
+  real->addPlayers(more_players);
+
+  real->chooseFirstTeam();
+
+  printf("%s\n", real->getAllPlayersString().c_str());
+
 
   return 0;
 }
