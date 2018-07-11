@@ -2,8 +2,12 @@
 #define PLAYER_H
 
 #include <string>
+#include <set>
+
+#include "Positions.h"
 
 using std::string;
+using std::set;
 
 class FootballClub;
 
@@ -17,6 +21,7 @@ private:
   uint8_t mid_score;
   uint8_t def_score;
   FootballClub* current_club;
+  set<PositionEnum> profficient_positions;
 
 public:
   Player(string fname,
@@ -47,6 +52,13 @@ public:
 
   FootballClub* getCurrentClub() const;
   void setCurrentClub(FootballClub* newClub);
+
+  PositionEnum getCurrentPosition();
+  // this will also calculate the actual scores that the player gives the team
+  void setCurrentPosition();
+
+  set<PositionEnum> getProfficientPositions();
+  bool addProficientPosition();
 };
 
 #endif
