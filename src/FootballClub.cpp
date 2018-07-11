@@ -145,15 +145,29 @@ string FootballClub::getAllPlayersString() const
 #include <stdlib.h>
 #include <time.h>
 
-static PositionEnum getRandomPosEnum(bool include_subres=true)
+static PositionEnum getRandomPosEnum(bool include_goalkeeper=true, bool include_subres=true)
 {
   int limit = 15;
   if(!include_subres)
   {
-    limit = 13;
+    limit = include_goalkeeper ? 13 : 12;
   }
 
   int rnumber = rand() % limit;
+
+  // this can happen if include_subres == true
+  if(rnumber == GK && !include_goalkeeper)
+  {
+    // try again
+    rnumber = rand() % limit;
+
+    // if we still have a GK result then SUB it
+    if (rnumber == GK)
+    {
+      // we know that here include_subres == true
+      rnumber = SUB;
+    }
+  }
 
   return static_cast<PositionEnum>(rnumber);
 }
@@ -171,6 +185,15 @@ void FootballClub::chooseFirstTeam()
 
   for(; it != players.end(); ++it)
   {
+    // if we don't have a goalkeeper then just choose the 11th
+    if(number_of_first_team_deployed == 10 && !goalkeeper_deployed)
+    {
+      it->second.first = GK;
+      number_of_first_team_deployed ++;
+      goalkeeper_deployed = true;
+      continue;
+    }
+
     // very random for now
     it->second.first = getRandomPosEnum();
 
@@ -184,6 +207,17 @@ void FootballClub::chooseFirstTeam()
       }
       else
       {
+        if(it->second.first == GK)
+        {
+          if(!goalkeeper_deployed)
+          {
+            goalkeeper_deployed = true;
+          }
+          else
+          {
+            it->second.first=getRandomPosEnum(false, false);
+          }
+        }
         number_of_first_team_deployed ++;
       }
     }
@@ -196,7 +230,7 @@ void FootballClub::chooseFirstTeam()
         // try to put them in first 11 if there is no place on bench
         if(number_of_first_team_deployed < 11)
         {
-          it->second.first = getRandomPosEnum(false);
+          it->second.first = getRandomPosEnum(false, false);
           number_of_first_team_deployed ++;
         }
         else
